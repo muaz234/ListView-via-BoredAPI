@@ -1,8 +1,10 @@
 package com.muaz.sharedpreferences;
 
+import android.os.StrictMode;
 import android.support.annotation.RequiresPermission;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -40,6 +42,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
         display = findViewById(R.id.display);
         result = findViewById(R.id.result);
         data = new ArrayList<String>();
@@ -48,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
             InputStream stream = new URL(url).openStream();
             BufferedReader reader = new BufferedReader(new InputStreamReader(stream));
             json_result = readData(reader);
+            Log.i("jsonresult", json_result);
              object = new JSONObject(json_result);
         } catch (IOException e) {
             e.printStackTrace();
@@ -55,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         data.add(json_result);
-        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, display,  data);
+        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1,  data);
         display.setAdapter(adapter);
     }
 }
