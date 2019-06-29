@@ -27,13 +27,13 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<String> data;
     String json_result;
     JSONObject object;
+    int next;
 //    @Override
 
-    private String readData(Reader rd) throws IOException {
+    private String readData(Reader reader) throws IOException {
         StringBuilder builder = new StringBuilder();
 
-        int next = rd.read();
-        while(next != -1){
+        while( (next = reader.read()) != -1){
             builder.append((char) next);
 
         }
@@ -42,12 +42,16 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-        StrictMode.setThreadPolicy(policy);
+        if (android.os.Build.VERSION.SDK_INT > 9)
+        {
+            StrictMode.ThreadPolicy policy = new
+                    StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+        }
         display = findViewById(R.id.display);
         result = findViewById(R.id.result);
         data = new ArrayList<String>();
-        String url = "http://www.boredapi.com/api/activity";
+        String url = "https://www.boredapi.com/api/activity";
         try {
             InputStream stream = new URL(url).openStream();
             BufferedReader reader = new BufferedReader(new InputStreamReader(stream));
