@@ -1,5 +1,8 @@
 package com.muaz.sharedpreferences;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.StrictMode;
 import android.support.annotation.RequiresPermission;
@@ -28,7 +31,7 @@ import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity {
     ListView display;
-    Button result;
+//    Button result;
     ArrayList<String> data;
     String json_result;
     JSONObject object;
@@ -54,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
             StrictMode.setThreadPolicy(policy);
         }
         display = findViewById(R.id.display);
-        result = findViewById(R.id.result);
+//        result = findViewById(R.id.result);
         data = new ArrayList<String>();
         String url = "https://www.boredapi.com/api/activity";
         try {
@@ -92,6 +95,12 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapter, View view, int position, long id) {
                 String value = (String) adapter.getItemAtPosition(position);
                 Log.i("itemclick", value);
+                SharedPreferences.Editor shared_preferences = getSharedPreferences("this", Activity.MODE_PRIVATE).edit();
+                shared_preferences.putString("value", value);
+                shared_preferences.apply();
+               Intent intent = new Intent(getApplicationContext(), ViewDataActivity.class);
+               startActivity(intent);
+
 
             }
         });

@@ -8,14 +8,14 @@
 
     <ListView
         android:id="@+id/display"
-        android:layout_width="395dp"
-        android:layout_height="650dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="32dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -26,12 +26,4 @@
         tools:ignore="MissingConstraints"
         android:id="@+id/textDisplay"/>
 
-    <Button
-        android:id="@+id/result"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/button_value"
-        tools:layout_editor_absoluteX="161dp"
-        tools:layout_editor_absoluteY="691dp"
-        tools:ignore="MissingConstraints" />
 </android.support.constraint.ConstraintLayout>
