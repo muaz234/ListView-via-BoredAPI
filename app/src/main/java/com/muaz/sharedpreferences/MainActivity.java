@@ -98,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
                 SharedPreferences.Editor shared_preferences = getSharedPreferences("this", Activity.MODE_PRIVATE).edit();
                 shared_preferences.putString("value", value);
                 shared_preferences.apply();
-               Intent intent = new Intent(getApplicationContext(), ViewDataActivity.class);
+               Intent intent = new Intent(MainActivity.this, ViewDataActivity.class);
                startActivity(intent);
 
 

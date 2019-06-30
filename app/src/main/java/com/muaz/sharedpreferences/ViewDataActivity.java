@@ -1,6 +1,7 @@
 package com.muaz.sharedpreferences;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -25,6 +26,11 @@ public class ViewDataActivity extends AppCompatActivity {
      }else {
          text.setText("No data is passed");
      }
+    }
 
+
+    public void onBackPressed() {
+     Intent intent = new Intent(ViewDataActivity.this, MainActivity.class) ;
+    startActivity(intent);
     }
 }
