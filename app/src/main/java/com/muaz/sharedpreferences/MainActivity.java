@@ -6,6 +6,8 @@ import android.support.annotation.RequiresPermission;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -60,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
             BufferedReader reader = new BufferedReader(new InputStreamReader(stream));
             json_result = readData(reader);
             JSONObject json_data = new JSONObject(json_result);
+            if(json_data.getString("link") == ""){
                 data.add(json_data.getString("activity"));
                 data.add(json_data.getString("accessibility"));
                 data.add(json_data.getString("type"));
@@ -67,6 +70,14 @@ public class MainActivity extends AppCompatActivity {
                 data.add(json_data.getString("price"));
                 data.add(json_data.getString("link"));
                 data.add(json_data.getString("key"));
+            } else {
+                data.add(json_data.getString("activity"));
+                data.add(json_data.getString("accessibility"));
+                data.add(json_data.getString("type"));
+                data.add(json_data.getString("participants"));
+                data.add(json_data.getString("price"));
+                data.add(json_data.getString("key"));
+            }
             Log.i("data", data.toString());
         } catch (IOException e) {
             e.printStackTrace();
@@ -74,7 +85,15 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 //        data.add(json_result);
-        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1,  data);
+        final ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1,  data);
         display.setAdapter(adapter);
+        display.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapter, View view, int position, long id) {
+                String value = (String) adapter.getItemAtPosition(position);
+                Log.i("itemclick", value);
+
+            }
+        });
     }
 }
