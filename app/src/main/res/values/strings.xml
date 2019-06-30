@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">SharedPreferences</string>
+    <string name="button_value">Read</string>
 </resources>
